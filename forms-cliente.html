@@ -104,7 +104,7 @@ if (!isset($_SESSION['id_usuario'])) {
                     </ul>
                     <ul class="nav navbar-top-links">
 
-                        
+            
                             <!--Notification dropdown menu-->
                             <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
                                 
@@ -189,7 +189,7 @@ if (!isset($_SESSION['id_usuario'])) {
 				
                     <div class="col-lg-12">
 						<div class="row">
-							<div class="col-lg-6">
+							<div class="col-lg-0">
 						
 								<hr class="new-section-sm bord-no">
 								<h4 class="text-main pad-btm bord-btm">With Tooltip</h4>
@@ -248,21 +248,47 @@ if (!isset($_SESSION['id_usuario'])) {
 											<div class="panel-body">
 												<div class="tab-content">
 						
-													<!--First tab-->
-													<div id="demo-cir-tab1" class="tab-pane">
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Username</label>
-															<div class="col-lg-7">
-																<input type="text" class="form-control" name="username" placeholder="Username">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Email address</label>
-															<div class="col-lg-7">
-																<input type="email" class="form-control" name="email" placeholder="Email">
-															</div>
-														</div>
-													</div>
+													<!-- First tab -->
+                                                    <div class="panel-body">
+                                                        <p class="bord-btm pad-ver text-main text-bold">Asignar Promotora</p>
+                                                        <fieldset>
+                                                            <!-- Selección de Promotora -->
+                                                            <div class="form-group">
+                                                                <label class="col-lg-3 control-label">Seleccionar Promotora</label>
+                                                                <div class="col-lg-7">
+                                                                    <select class="form-control" name="id_promotora" required>
+                                                                        <option value="">Seleccione una promotora</option>
+                                                                        <!-- Opciones dinámicas -->
+                                                                        <?php
+                                                                        // Conexión a la base de datos
+                                                                        $conexion = new mysqli("localhost", "root", "", "amaconfiafin");
+                                                    
+                                                                        // Verificar conexión
+                                                                        if ($conexion->connect_error) {
+                                                                            die("Error de conexión: " . $conexion->connect_error);
+                                                                        }
+                                                    
+                                                                        // Consultar promotoras existentes
+                                                                        $sql = "SELECT id_promotora, nombre_completo FROM promotora";
+                                                                        $resultado = $conexion->query($sql);
+                                                    
+                                                                        // Generar opciones del select
+                                                                        if ($resultado->num_rows > 0) {
+                                                                            while ($fila = $resultado->fetch_assoc()) {
+                                                                                echo '<option value="' . $fila['id_promotora'] . '">' . $fila['nombre_completo'] . '</option>';
+                                                                            }
+                                                                        } else {
+                                                                            echo '<option value="">No hay promotoras disponibles</option>';
+                                                                        }
+                                                    
+                                                                        $conexion->close();
+                                                                        ?>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                    
 						
 													<!--Second tab-->
 													<div id="demo-cir-tab2" class="tab-pane fade">
@@ -320,125 +346,7 @@ if (!isset($_SESSION['id_usuario'])) {
 						
 								</div>
 							</div>
-							<div class="col-lg-6">
-						
-								<hr class="new-section-sm bord-no">
-								<h4 class="text-main pad-btm bord-btm">With Validation</h4>
-								<div class="panel">
-						
-									<!-- Form wizard with Validation -->
-									<!--===================================================-->
-									<div id="demo-bv-wz">
-										<div class="wz-heading pad-top">
-						
-											<!--Nav-->
-											<ul class="row wz-step wz-icon-bw wz-nav-off mar-top">
-												<li class="col-xs-3">
-													<a data-toggle="tab" href="#demo-bv-tab1">
-														<span class="text-danger"><i class="demo-pli-information icon-2x"></i></span>
-														<p class="text-semibold mar-no">Account</p>
-													</a>
-												</li>
-												<li class="col-xs-3">
-													<a data-toggle="tab" href="#demo-bv-tab2">
-														<span class="text-warning"><i class="demo-pli-male icon-2x"></i></span>
-														<p class="text-semibold mar-no">Profile</p>
-													</a>
-												</li>
-												<li class="col-xs-3">
-													<a data-toggle="tab" href="#demo-bv-tab3">
-														<span class="text-info"><i class="demo-pli-home icon-2x"></i></span>
-														<p class="text-semibold mar-no">Address</p>
-													</a>
-												</li>
-												<li class="col-xs-3">
-													<a data-toggle="tab" href="#demo-bv-tab4">
-														<span class="text-success"><i class="demo-pli-medal-2 icon-2x"></i></span>
-														<p class="text-semibold mar-no">Finish</p>
-													</a>
-												</li>
-											</ul>
-										</div>
-						
-										<!--progress bar-->
-										<div class="progress progress-xs">
-											<div class="progress-bar progress-bar-primary"></div>
-										</div>
-						
-						
-										<!--Form-->
-										<form id="demo-bv-wz-form" class="form-horizontal">
-											<div class="panel-body">
-												<div class="tab-content">
-						
-													<!--First tab-->
-													<div id="demo-bv-tab1" class="tab-pane">
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Username</label>
-															<div class="col-lg-7">
-																<input type="text" class="form-control" name="username" placeholder="Username">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Email address</label>
-															<div class="col-lg-7">
-																<input type="email" class="form-control" name="email" placeholder="Email">
-															</div>
-														</div>
-													</div>
-						
-													<!--Second tab-->
-													<div id="demo-bv-tab2" class="tab-pane fade">
-														<div class="form-group">
-															<label class="col-lg-3 control-label">First name</label>
-															<div class="col-lg-7">
-																<input type="text" placeholder="First name" name="firstName" class="form-control">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Last name</label>
-															<div class="col-lg-7">
-																<input type="text" placeholder="Last name" name="lastName" class="form-control">
-															</div>
-														</div>
-													</div>
-						
-													<!--Third tab-->
-													<div id="demo-bv-tab3" class="tab-pane">
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Phone Number</label>
-															<div class="col-lg-7">
-																<input type="text" placeholder="Phone number" name="phoneNumber" class="form-control">
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-lg-3 control-label">Address</label>
-															<div class="col-lg-7">
-																<input type="text" placeholder="Phone number" name="address" class="form-control">
-															</div>
-														</div>
-													</div>
-						
-													<!--Fourth tab-->
-													<div id="demo-bv-tab4" class="tab-pane  mar-btm text-center">
-														<h4>Thank you</h4>
-														<p class="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. </p>
-													</div>
-												</div>
-											</div>
-						
-											<!--Footer button-->
-											<div class="panel-footer text-right">
-												<div class="box-inline">
-													<button type="button" class="previous btn btn-primary">Previous</button>
-													<button type="button" class="next btn btn-primary">Next</button>
-													<button type="button" class="finish btn btn-warning" disabled="">Finish</button>
-												</div>
-											</div>
-										</form>
-									</div>
-									<!--===================================================-->
-									<!-- End Form wizard with Validation -->
+							
 						
 								</div>
 							</div>
