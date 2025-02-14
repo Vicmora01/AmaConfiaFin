@@ -1,0 +1,585 @@
+﻿<?php
+session_start();
+if (!isset($_SESSION['id_usuario'])) {
+    header("Location: pages-login.html");
+    exit();
+}
+?>
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>AmaConfiaFin</title>
+
+
+    <!--STYLESHEET-->
+    <!--=================================================-->
+
+    <!--Open Sans Font [ OPTIONAL ]-->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+
+    <!--Bootstrap Stylesheet [ REQUIRED ]-->
+    <link href="css\bootstrap.min.css" rel="stylesheet">
+
+
+    <!--Nifty Stylesheet [ REQUIRED ]-->
+    <link href="css\nifty.min.css" rel="stylesheet">
+
+
+    <!--Nifty Premium Icon [ DEMONSTRATION ]-->
+    <link href="css\demo\nifty-demo-icons.min.css" rel="stylesheet">
+
+
+    <!--=================================================-->
+
+
+
+    <!--Pace - Page Load Progress Par [OPTIONAL]-->
+    <link href="plugins\pace\pace.min.css" rel="stylesheet">
+    <script src="plugins\pace\pace.min.js"></script>
+
+
+            
+   <!--=================================================
+
+    REQUERIDO
+    Debes incluir esto en tu proyecto.
+
+    RECOMENDADO
+    Esta categoría debe ser incluida, pero puedes modificar qué plugins o componentes deben ser incluidos en tu proyecto.
+
+    OPCIONAL
+    Plugins opcionales. Puedes elegir si incluirlos en tu proyecto o no.
+
+    DEMOSTRACIÓN
+    Esto debe ser eliminado, se utiliza solo con fines de demostración. Esta categoría no debe ser incluida en tu proyecto.
+
+    MUESTRA
+    Algunos ejemplos de scripts que explican cómo inicializar plugins o componentes. Esta categoría no debe ser incluida en tu proyecto.
+
+    Información detallada y más ejemplos se pueden encontrar en el documento.
+
+=================================================-->
+
+        
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+<body>
+    <div id="container" class="effect aside-float aside-bright mainnav-lg">
+        
+        <!--NAVBAR-->
+        <!--===================================================-->
+        <header id="navbar">
+            <div id="navbar-container" class="boxed">
+
+                <!--Brand logo & name-->
+                <!--================================-->
+                <div class="navbar-header">
+                    <a href="index.html" class="navbar-brand">
+                        <img src="img\logo.png" alt="Nifty Logo" class="brand-icon">
+                        <div class="brand-title">
+                            <span class="brand-text">AmaConfiaFin</span>
+                        </div>
+                    </a>
+                </div>
+             
+                <div class="navbar-content">
+                    <ul class="nav navbar-top-links">
+                        <li class="tgl-menu-btn">
+                            <a class="mainnav-toggle" href="#">
+                                <i class="demo-pli-list-view"></i>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="nav navbar-top-links">
+
+                        
+                            <!--Notification dropdown menu-->
+                            <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
+                                
+
+                                <!--Dropdown footer-->
+                                <div class="pad-all bord-top">
+                                    <a href="#" class="btn-link text-main box-block">
+                                        <i class="pci-chevron chevron-right pull-right"></i>Show All Notifications
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        
+
+
+
+                        <!--User dropdown-->
+                        <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                        <li id="dropdown-user" class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle text-right">
+                                <span class="ic-user pull-right">
+                                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                    <!--You can use an image instead of an icon.-->
+                                    <!--<img class="img-circle img-user media-object" src="img/profile-photos/1.png" alt="Profile Picture">-->
+                                    <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                    <i class="demo-pli-male"></i>
+                                </span>
+                                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                                <!--You can also display a user name in the navbar.-->
+                                <!--<div class="username hidden-xs">Aaron Chavez</div>-->
+                                <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+                            </a>
+
+
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-right panel-default">
+                                <ul class="head-list">
+                                    <li>
+                                        <a href="#"><i class="demo-pli-male icon-lg icon-fw"></i> Perfil</a>
+                                    </li>
+                                    
+                                    <li>
+                                        <a href="#"><i class="demo-pli-gear icon-lg icon-fw"></i> Configuracion</a>
+                                    </li>
+                                    
+                                    <li>
+										<a href="logout.php"><i class="demo-pli-unlock icon-lg icon-fw"></i> Cerrar Sesión</a>
+									</li>
+									
+                                </ul>
+                            </div>
+                        </li>
+             
+                        
+                        
+                    </ul>
+                </div>
+               
+
+            </div>
+        </header>
+        <!--===================================================-->
+        <!--END NAVBAR-->
+
+        <div class="boxed">
+
+            <!--CONTENT CONTAINER-->
+            <!--===================================================-->
+            <div id="content-container">
+                <div id="page-head">
+                    
+<div class="pad-all text-center">
+    <h3>Registro de Nueva Promotora</h3>
+    <p1>Formulario para dar de alta nuevas promotoras<p>
+</p1></div>
+                    </div>
+
+                
+                <!--Page content-->
+                <!--===================================================-->
+                <div id="page-content">
+                    
+				
+                    <div class="col-lg-12">
+                        <div class="panel">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Formulario de Registro de Promotora</h3>
+                            </div>
+                    
+                            <form id="form-promotora" action="registro-promotora.php" method="POST" class="form-horizontal">
+                                <div class="panel-body">
+                                    <p class="bord-btm pad-ver text-main text-bold">Datos Generales</p>
+                    
+                                    <!-- Nombre Completo -->
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Nombre Completo</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" name="nombre_completo" placeholder="Nombre completo" required>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Edad -->
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Edad</label>
+                                        <div class="col-lg-7">
+                                            <input type="number" class="form-control" name="edad" placeholder="Edad" required min="18">
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Género -->
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Género</label>
+                                        <div class="col-lg-7">
+                                            <div class="radio">
+                                                <input id="genero-masculino" class="magic-radio" type="radio" name="genero" value="Masculino" required>
+                                                <label for="genero-masculino">Masculino</label>
+                    
+                                                <input id="genero-femenino" class="magic-radio" type="radio" name="genero" value="Femenino">
+                                                <label for="genero-femenino">Femenino</label>
+                    
+                                
+                                            </div>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Correo Electrónico -->
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Correo Electrónico</label>
+                                        <div class="col-lg-7">
+                                            <input type="email" class="form-control" name="correo_electronico" placeholder="Correo electrónico" required>
+                                        </div>
+                                    </div>
+                    
+                                    <!-- Teléfono -->
+                                    <div class="form-group">
+                                        <label class="col-lg-3 control-label">Teléfono</label>
+                                        <div class="col-lg-7">
+                                            <input type="text" class="form-control" name="telefono" placeholder="Teléfono" required>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-sm-7 col-sm-offset-3">
+                                            <button class="btn btn-primary" type="submit">Registrar Promotora</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    
+					
+					    
+					
+					    
+                </div>
+                <!--===================================================-->
+                <!--End page content-->
+
+            </div>
+            <!--===================================================-->
+            <!--END CONTENT CONTAINER-->
+            
+            <!--MAIN NAVIGATION-->
+            <!--===================================================-->
+            <nav id="mainnav-container">
+                <div id="mainnav">
+
+
+                    <!--OPTIONAL : ADD YOUR LOGO TO THE NAVIGATION-->
+                    <!--It will only appear on small screen devices.-->
+                    <!--================================
+                    <div class="mainnav-brand">
+                        <a href="index.html" class="brand">
+                            <img src="img/logo.png" alt="Nifty Logo" class="brand-icon">
+                            <span class="brand-text">Nifty</span>
+                        </a>
+                        <a href="#" class="mainnav-toggle"><i class="pci-cross pci-circle icon-lg"></i></a>
+                    </div>
+                    -->
+
+                    <!--Menu-->
+                    <!--================================-->
+                    <div id="mainnav-menu-wrap">
+                        <div class="nano">
+                            <div class="nano-content">
+
+                                <!--Profile Widget-->
+                                <!--================================-->
+                                <div id="mainnav-profile" class="mainnav-profile">
+                                    <div class="profile-wrap text-center">
+                                        <div class="pad-btm">
+                                            <img class="img-circle img-md" src="img\profile-photos\1.png" alt="Profile Picture">
+                                        </div>
+                                        <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                            <span class="pull-right dropdown-toggle">
+                                                <i class="dropdown-caret"></i>
+                                            </span>
+                                            <p class="mnp-name">Lic. Fidel</p>
+                                            <span class="mnp-desc">@gmail.com</span>
+                                        </a>
+                                    </div>
+                                    <div id="profile-nav" class="collapse list-group bg-trans">
+                                        <a href="#" class="list-group-item">
+                                            <i class="demo-pli-male icon-lg icon-fw"></i> Ver Perfil
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <i class="demo-pli-gear icon-lg icon-fw"></i> Configuraciones
+                                        </a>
+                                        <a href="logout.php" class="list-group-item">
+                                            <i class="demo-pli-unlock icon-lg icon-fw"></i> Cerrar Sesion
+                                        </a>
+                                    </div>
+                                </div>
+
+
+
+                                <ul id="mainnav-menu" class="list-group">
+						
+						            <!--Category name-->
+						            <li class="list-header">👥Gestión de Clientes</li>
+						
+						            <!--Menu list item-->
+						            <li >
+						                <a href="#">
+						                    <i class="demo-pli-home"></i>
+						                    <span class="menu-title">Clientes</span>
+											<i class="arrow"></i>
+						                </a>
+						
+						                <!--Submenu-->
+						                <ul class="collapse">
+						                    <li ><a href="index.html">📄Lista de Clientes</a></li>
+											<li><a href="forms-cliente.html">➕Nuevo Cliente.</a></li>
+											<li><a href="dashboard-3.html">🔍Buscar Cliente</a></li>
+											<li><a href="dashboard-3.html">📝Historial de Créditos</a></li>
+											<li><a href="dashboard-3.html">📌Garantías del Cliente</a></li>
+											<li><a href="dashboard-3.html">📂Documentos</a></li>
+											
+						                </ul>
+						            </li>
+
+						            <li class="list-divider"></li>
+
+									   <!--Category name-->
+									   <li class="list-header">🤝 Gestión de Avales</li>
+						
+									   <!--Menu list item-->
+									   <li >
+										   <a href="#">
+											   <i class="demo-pli-home"></i>
+											   <span class="menu-title">Avales</span>
+											   <i class="arrow"></i>
+										   </a>
+						   
+										   <!--Submenu-->
+										   <ul class="collapse">
+											   <li ><a href="index.html">📄 Lista de Avales</a></li>
+											   <li><a href="dashboard-2.html">➕Nuevo Aval.</a></li>
+											   <li><a href="dashboard-3.html">🔍Buscar Aval</a></li>
+											   <li><a href="dashboard-3.html">📌Garantías del Aval</a></li>
+											   <li><a href="dashboard-3.html">📂Documentos</a></li>
+											   
+										   </ul>
+									   </li>
+									   <li class="list-divider"></li>
+
+									   <!--Category name-->
+									   <li class="list-header">💰 Gestión de Créditos y Pagos</li>
+						
+									   <!--Menu list item-->
+									   <li >
+										   <a href="#">
+											   <i class="demo-pli-home"></i>
+											   <span class="menu-title">Creditos y Pagos</span>
+											   <i class="arrow"></i>
+										   </a>
+						   
+										   <!--Submenu-->
+										   <ul class="collapse ">
+											   <li ><a href="index.html">📄 Lista de Créditos Otorgados.</a></li>
+											   <li><a href="dashboard-2.html">➕ Registrar Nueva Solicitud de Crédito.</a></li>
+											   <li><a href="dashboard-3.html">📆 Calendario de Pagos</a></li>
+											   <li><a href="dashboard-3.html">💳 Pagos Realizados</a></li>
+											   <li><a href="dashboard-3.html">⚠️ Clientes con Atrasos</a></li>
+											   <li><a href="dashboard-3.html">📊 Reporte de Ingresos y Deudas.</a></li>
+											   
+										   </ul>
+									   </li>
+   
+									   <li class="list-divider"></li>
+
+									    <!--Category name-->
+										<li class="list-header">📂 Gestión de Documentos </li>
+						
+										<!--Menu list item-->
+										<li >
+											<a href="#">
+												<i class="demo-pli-home"></i>
+												<span class="menu-title">Documentos</span>
+												<i class="arrow"></i>
+											</a>
+							
+											<!--Submenu-->
+											<ul class="collapse ">
+												<li ><a href="index.html">📋 Subir Documentos</a></li>
+												<li><a href="dashboard-2.html">🔍 Buscar Documentos</a></li>
+												<li><a href="dashboard-3.html">📌 Verificar Documentación</a></li>
+												<li><a href="dashboard-3.html">💳 Pagos Realizados</a></li>
+											</ul>
+										</li>
+	
+										<li class="list-divider"></li>
+ <!--Category name-->
+ <li class="list-header">👥Gestión de Promotoras</li>
+						
+ <!--Menu list item-->
+ <li >
+     <a href="#">
+         <i class="demo-pli-home"></i>
+         <span class="menu-title">Promotoras</span>
+         <i class="arrow"></i>
+     </a>
+
+     <!--Submenu-->
+     <ul class="collapse">
+         <li ><a href="index.html">📄Lista de Promotoras</a></li>
+         <li><a href="forms-promotora.html">➕Nueva Promotora.</a></li>
+         <li><a href="dashboard-3.html">🔍Buscar Promotora</a></li>
+         <li><a href="dashboard-3.html">📝Historial de Promotoras</a></li>
+        
+         
+     </ul>
+ </li>
+ <li class="list-divider"></li>
+										 <!--Category name-->
+										 <li class="list-header">⚙️ Configuración y Seguridad </li>
+						
+										 <!--Menu list item-->
+										 <li >
+											 <a href="#">
+												 <i class="demo-pli-home"></i>
+												 <span class="menu-title">Configuración y Seguridad</span>
+												 <i class="arrow"></i>
+											 </a>
+							 
+											 <!--Submenu-->
+											 <ul class="collapse ">
+												 <li ><a href="index.html">👤 Gestión de Usuarios</a></li>
+												 <li><a href="dashboard-2.html">🔑 Cambiar Contraseña.</a></li>
+												 <li><a href="dashboard-3.html">🔍 Historial de Accesos y Registros.</a></li>
+												 <li><a href="dashboard-3.html">🌐 Configuración General</a></li>
+											 </ul>
+										 </li>
+	 
+										 <li class="list-divider"></li>
+
+
+
+
+
+
+						
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--================================-->
+                    <!--End menu-->
+
+                </div>
+            </nav>
+            <!--===================================================-->
+            <!--END MAIN NAVIGATION-->
+
+        </div>
+
+        
+
+        <!-- FOOTER -->
+        <!--===================================================-->
+        <footer id="footer">
+
+            <!-- Visible when footer positions are fixed -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <div class="show-fixed pad-rgt pull-right">
+                You have <a href="#" class="text-main"><span class="badge badge-danger">3</span> pending action.</a>
+            </div>
+
+
+
+           
+
+
+
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+            <!-- Remove the class "show-fixed" and "hide-fixed" to make the content always appears. -->
+            <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+            <p class="pad-lft">&#0169; 2025 AmaConfiaFin</p>
+
+
+
+        </footer>
+        <!--===================================================-->
+        <!-- END FOOTER -->
+
+
+        <!-- SCROLL PAGE BUTTON -->
+        <!--===================================================-->
+        <button class="scroll-top btn">
+            <i class="pci-chevron chevron-up"></i>
+        </button>
+        <!--===================================================-->
+    </div>
+    <!--===================================================-->
+    <!-- END OF CONTAINER -->
+
+
+    
+    
+    
+    <!--JAVASCRIPT-->
+    <!--=================================================-->
+
+    <!--jQuery [ REQUIRED ]-->
+    <script src="js\jquery.min.js"></script>
+
+
+    <!--BootstrapJS [ RECOMMENDED ]-->
+    <script src="js\bootstrap.min.js"></script>
+
+
+    <!--NiftyJS [ RECOMMENDED ]-->
+    <script src="js\nifty.min.js"></script>
+
+
+
+
+    <!--=================================================-->
+    
+   
+
+    
+    <!--Flot Chart [ OPTIONAL ]-->
+    <script src="plugins\flot-charts\jquery.flot.min.js"></script>
+	<script src="plugins\flot-charts\jquery.flot.resize.min.js"></script>
+	<script src="plugins\flot-charts\jquery.flot.tooltip.min.js"></script>
+
+
+    <!--Sparkline [ OPTIONAL ]-->
+    <script src="plugins\sparkline\jquery.sparkline.min.js"></script>
+
+
+    <!--Specify page [ SAMPLE ]-->
+    <script src="js\demo\dashboard.js"></script>
+
+<!--Demo script [ DEMONSTRATION ]-->
+<script src="js\demo\nifty-demo.min.js"></script>
+
+    
+<!--Bootstrap Validator [ OPTIONAL ]-->
+<script src="plugins\bootstrap-validator\bootstrapValidator.min.js"></script>
+
+
+<!--Masked Input [ OPTIONAL ]-->
+<script src="plugins\masked-input\jquery.maskedinput.min.js"></script>
+
+
+<!--Form validation [ SAMPLE ]-->
+<script src="js\demo\form-validation.js"></script>
+
+
+    
+
+</body>
+</html>
